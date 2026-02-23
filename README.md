@@ -53,6 +53,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 The Jupyter notebook `pointcloud_laplacian.ipynb` contains the instructions, the `laplacian.py` -- the plain python code. 
+To run the `laplacian.py` use:
+```bash
+python laplacian.py 'data/bunny.ply' 'data/dragon.ply' --k 25 --lam 5.0
+```
 The necessary data live in the `data` directory. The `tests` directory includes a single .py file with some useful unit tests. 
 
 
