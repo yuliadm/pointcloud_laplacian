@@ -22,7 +22,7 @@ The applications of the graph Laplacian are numerous  - from LiDAR-based SLAM & 
 
 In this tutorial we will compute one of the versios of the graph Laplacian and use it for smoothing and transforming one point cloud shape to another. 
 
-<iframe src="https://yourusername.github.io" width="800" height="600" seamless scrolling="yes"></iframe>
+<iframe src="https://github.com/yuliadm/pointcloud_laplacian/blob/main/assets/bunny_dragon.html" width="800" height="600" seamless scrolling="yes"></iframe>
 
 
 ### Tutorial structure
