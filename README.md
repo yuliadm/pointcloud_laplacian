@@ -40,6 +40,7 @@ pointcloud_laplacian (root)/
 │   └── 📄 dragon.ply
 ├── 📁 tests/
 │   └── 📄 tests.py
+
 ├── 📄 pointcloud_laplacian.ipynb
 ├── 📄 laplacian.py
 ├── 📄 requirements.txt
@@ -52,13 +53,18 @@ python3 -m venv .venv
 source .venv/bin/activate 
 pip install -r requirements.txt
 ```
-The Jupyter notebook `pointcloud_laplacian.ipynb` contains the instructions, the `laplacian.py` -- the plain python code. 
-To run the `laplacian.py` use:
+The Jupyter notebook `pointcloud_laplacian.ipynb` contains the instructions and explanations.
+The necessary data live in the `data` directory. The `tests` directory includes `laplacian.py` -- plain python code. 
+To run the `laplacian.py`, use (inside /tests):
 ```bash
 python laplacian.py 'data/bunny.ply' 'data/dragon.ply' --k 25 --lam 5.0
 ```
-The necessary data live in the `data` directory. The `tests` directory includes a single .py file with some useful unit tests. 
 
+The `tests.py` file within the same directory runs several unit tests. Execution (inside \tests): 
+```bash
+cd tests
+python tests.py
+```
 
 ### Tutorial outline
 
