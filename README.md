@@ -11,16 +11,19 @@ The key difference between point clouds and 3D meshes is that point clouds are u
   <img src="assets/stanford_bunny.png" width="1000" alt="3D model of the Stanford Bunny">
   <figcaption>Figure 1: The stanford bunny 3D models: mesh (left) and pointcloud (right)</figcaption>
 </figure>
+<br><br>
 
 
 
-
-Unlike mesh models, point clouds lack explicit connectivity information (edges and faces), making it difficult to compute derivatives on them [1]. A major challenge is to extract global information from the given point clouds due to the lack of connectivity. The graph Laplacian solves this by defining connectivity based on neighborhood graphs (e.g., $k$-nearest neighbors) and constructing a discrete operator that approximates continuous geometric properties, such as curvature or surface normal, on the discrete data. 
+Unlike mesh models, point clouds lack explicit connectivity information (edges and faces), making it difficult to compute derivatives on them. A major challenge is to extract global information from the given point clouds due to the lack of connectivity. The graph Laplacian solves this by defining connectivity based on neighborhood graphs (e.g., $k$-nearest neighbors) and constructing a discrete operator that approximates continuous geometric properties, such as curvature or surface normal, on the discrete data. 
 
 The applications of the graph Laplacian are numerous  - from LiDAR-based SLAM & navigation for umanned vehicles to surface reconstruction and mesh generation for hole-filling and repairing 3D scans.
 
 
 In this tutorial we will compute one of the versios of the graph Laplacian and use it for smoothing and transforming one point cloud shape to another. 
+
+<iframe src="https://yourusername.github.io" width="800" height="600" seamless scrolling="yes"></iframe>
+
 
 ### Tutorial structure
 
@@ -37,6 +40,16 @@ pointcloud_laplacian (root)/
 ├── 📄 requirements.txt
 └── 📄 README.md
 ```
+
+Create the environment, activate and install the requirements, e.g.: 
+```bash
+python3 -m venv .venv
+source .venv/bin/activate 
+pip install -r requirements.txt
+```
+The Jupyter notebook `` contains the instructions, the `laplacian.py` contains the plain python code. The necessary data are contained in the `data` directory. The `tests` directory contains some useful unit tests. 
+
+
 ### Tutorial outline
 
 * What you will build
@@ -47,6 +60,8 @@ pointcloud_laplacian (root)/
 * Testing your code
 
 
+
+#### References:
 
 1. Liang, J., Lai, R., Wong, T.W. and Zhao, H., 2012, June. Geometric understanding of point clouds using Laplace-Beltrami operator. In 2012 IEEE conference on computer vision and pattern recognition (pp. 214-221). IEEE. https://ww3.math.ucla.edu/camreport/cam12-26.pdf
 2. Alexiou, E., Ebrahimi, T., Bernardo, M.V., Pereira, M., Pinheiro, A., Cruz, L.A.D.S., Duarte, C., Dmitrovic, L.G., Dumic, E., Matkovics, D. and Skodras, A., 2018, May. Point cloud subjective evaluation methodology based on 2D rendering. In 2018 Tenth international conference on quality of multimedia experience (QoMEX) (pp. 1-6). IEEE.
