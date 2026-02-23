@@ -8,7 +8,7 @@ We often want to analyse local geometric properties of surfaces — how they ben
 The key difference between point clouds and 3D meshes is that point clouds are unconnected data points, rather than a surface constructed from triangles or polygons (Figure 1).
 
 <figure>
-  <img src="stanford_bunny.png" width="1000" alt="3D model of the Stanford Bunny">
+  <img src="assets/stanford_bunny.png" width="1000" alt="3D model of the Stanford Bunny">
   <figcaption>Figure 1: The stanford bunny 3D models: mesh (left) and pointcloud (right)</figcaption>
 </figure>
 
