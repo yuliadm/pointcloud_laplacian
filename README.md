@@ -24,7 +24,7 @@ In this tutorial we will compute one of the versios of the graph Laplacian and u
 
 <figure>
   <img src="assets/bunny.gif" width="500" alt="3D point cloud deformation">
-  <figcaption>Figure 2: The stanford bunny 3D models: mesh (left) and pointcloud (right)</figcaption>
+  <figcaption>Figure 2: Graph Laplacian-driven point cloud deformation</figcaption>
 </figure>
 <br><br>
 
