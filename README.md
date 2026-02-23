@@ -39,10 +39,9 @@ pointcloud_laplacian (root)/
 │   ├── 📄 bunny.ply
 │   └── 📄 dragon.ply
 ├── 📁 tests/
+│   ├── 📄 laplacian.py
 │   └── 📄 tests.py
-
 ├── 📄 pointcloud_laplacian.ipynb
-├── 📄 laplacian.py
 ├── 📄 requirements.txt
 └── 📄 README.md
 ```
