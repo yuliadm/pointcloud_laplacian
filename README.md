@@ -61,7 +61,6 @@ python laplacian.py 'data/bunny.ply' 'data/dragon.ply' --k 25 --lam 5.0
 
 The `tests.py` file within the same directory runs several unit tests. Execution (inside \tests): 
 ```bash
-cd tests
 python tests.py
 ```
 
