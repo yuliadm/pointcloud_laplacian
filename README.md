@@ -52,7 +52,8 @@ python3 -m venv .venv
 source .venv/bin/activate 
 pip install -r requirements.txt
 ```
-The Jupyter notebook `pointcloud_laplacian.ipynb` contains the instructions, the `laplacian.py` contains the plain python code. The necessary data are contained in the `data` directory. The `tests` directory contains some useful unit tests. 
+The Jupyter notebook `pointcloud_laplacian.ipynb` contains the instructions, the `laplacian.py` -- the plain python code. 
+The necessary data live in the `data` directory. The `tests` directory includes a single .py file with some useful unit tests. 
 
 
 ### Tutorial outline
