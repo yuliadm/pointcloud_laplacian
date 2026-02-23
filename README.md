@@ -13,6 +13,8 @@ The key difference between point clouds and 3D meshes is that point clouds are u
 </figure>
 
 
+
+
 Unlike mesh models, point clouds lack explicit connectivity information (edges and faces), making it difficult to compute derivatives on them [1]. A major challenge is to extract global information from the given point clouds due to the lack of connectivity. The graph Laplacian solves this by defining connectivity based on neighborhood graphs (e.g., $k$-nearest neighbors) and constructing a discrete operator that approximates continuous geometric properties, such as curvature or surface normal, on the discrete data. 
 
 The applications of the graph Laplacian are numerous  - from LiDAR-based SLAM & navigation for umanned vehicles to surface reconstruction and mesh generation for hole-filling and repairing 3D scans.
