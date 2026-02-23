@@ -43,3 +43,10 @@ pointcloud_laplacian (root)/
 * Stable smoothing + simple nearest neighbor pull (explicit solve)
 * Deformation visualization
 * Testing your code
+
+
+
+1. Liang, J., Lai, R., Wong, T.W. and Zhao, H., 2012, June. Geometric understanding of point clouds using Laplace-Beltrami operator. In 2012 IEEE conference on computer vision and pattern recognition (pp. 214-221). IEEE. https://ww3.math.ucla.edu/camreport/cam12-26.pdf
+2. Alexiou, E., Ebrahimi, T., Bernardo, M.V., Pereira, M., Pinheiro, A., Cruz, L.A.D.S., Duarte, C., Dmitrovic, L.G., Dumic, E., Matkovics, D. and Skodras, A., 2018, May. Point cloud subjective evaluation methodology based on 2D rendering. In 2018 Tenth international conference on quality of multimedia experience (QoMEX) (pp. 1-6). IEEE.
+https://www.epfl.ch/labs/mmspg/downloads/reconstructed-point-clouds-results/
+3. The Stanford 3D Scanning Repository: https://graphics.stanford.edu/data/3Dscanrep/
