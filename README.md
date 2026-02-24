@@ -56,10 +56,19 @@ The Jupyter notebook `pointcloud_laplacian.ipynb` contains the instructions and 
 The necessary data live in the `data` directory. The `tests` directory includes `laplacian.py` -- plain python code. 
 To run the `laplacian.py`, use (inside /tests):
 ```bash
-python laplacian.py 'data/bunny.ply' 'data/dragon.ply' --k 25 --lam 5.0
+python laplacian.py 'data/bunny.ply' 'data/dragon.ply' --k 25 --lam 5.0 --normalize
 ```
+ parameters:
+ `p_path`: str, Path to matrix P (.ply file)<br><br>
+ `t_path`: str, Path to matrix T (.ply file)<br><br>
+ `--k`: int, default=20, Number of nearest neighbors<br><br>
+ `--lam`: float, default=10.0, Stiffness parameter<br><br>
+ `--n_frames`: int, default=30, Number of frames<br><br>
+ `--refresh_every`: int, default=5, Number of steps after which Laplacian and correspondence are updated<br><br>
+ `--normalize`: help="Enable normalization (default (no flag) is False)")<br><br>
+    
 
-The `tests.py` file within the same directory runs several unit tests. Execution (inside \tests): 
+The `tests.py` file within the same directory runs several unit tests. Execution (inside /tests): 
 ```bash
 python tests.py
 ```
