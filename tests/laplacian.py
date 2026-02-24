@@ -10,7 +10,7 @@ import argparse
 
 # Build kNN weighted graph Laplacian on init point cloud
 
-def build_knn_laplacian(P, k=20, sigma=None, symmetrize=True):
+def build_knn_laplacian(P, k=20, sigma=None, symmetrize=True, normalize=False):
     '''
     compute the Laplacian least squares.
   
@@ -47,9 +47,16 @@ def build_knn_laplacian(P, k=20, sigma=None, symmetrize=True):
         W = W.maximum(W.T)
 
     d = np.array(W.sum(axis=1)).reshape(-1)
+    d = np.maximum(d, 1e-12)
     D = sp.diags(d, offsets=0, shape=(n, n), format="csr")
-    L = D - W
-    return L
+    
+    if normalize:
+        D_inv_sqrt = sp.diags(1.0 / np.sqrt(d))
+        L = sp.eye(n, format="csr") - (D_inv_sqrt @ W @ D_inv_sqrt)
+    else:
+        L = D - W
+    
+    return L, d
 
 
 
@@ -65,7 +72,7 @@ def recompute_Tcorr(Pcur, T):
 
 def laplacian_morph_frames(
     P, T, k=20, lam=10.0, n_frames=30,
-    refresh_every=5, sigma=None
+    refresh_every=5, sigma=None, normalize=False
 ):
     '''
     Morph P -> T using Laplacian least squares.
@@ -97,7 +104,7 @@ def laplacian_morph_frames(
             Tcorr = recompute_Tcorr(Pcur, T)  # (n,3)
 
             # 2) Refresh Laplacian (graph) on current geometry
-            L_current = build_knn_laplacian(Pcur, k=k, sigma=sigma, symmetrize=True)
+            L_current, _ = build_knn_laplacian(Pcur, k=k, sigma=sigma, symmetrize=True, normalize=normalize)
 
             # 3) Refresh Laplacian coords + solver factorization
             deltaP = L_current @ Pcur
@@ -223,25 +230,8 @@ def plotly_slider(frames, title="Laplacian Morph", marker_size=2):
 
 # End-to-end wrapper: normalize data, compute Laplacian, morph, visualize
 
-def main(P, T, k=20, lam=10.0, n_frames=30):
-
-    # Normalize initial and target point clouds
-    mu = P.mean(axis=0, keepdims=True)
-    P0 = P - mu
-    scale = np.sqrt((P0**2).sum(axis=1)).mean()
-
-    P = P0 / (scale + 1e-12)
-    T = (T - mu) / (scale + 1e-12)
-    
-    # Compute deformation frames
-    ts, frames = laplacian_morph_frames(P, T, k=k, lam=lam, n_frames=n_frames, refresh_every=5, sigma=None)
-    
-    # Visualize
-    plotly_slider(frames, title=f"Laplacian morph (k={k}, λ={lam})")
-
-
-
-def main(P_path, T_path, k=20, lam=10.0, n_frames=30):
+def main(P_path, T_path, k=20, lam=10.0, n_frames=30,
+            refresh_every=5, sigma=None, normalize=False):
 
     pcd_init = o3d.io.read_point_cloud(P_path)
     P = np.asarray(pcd_init.points, dtype=np.float64)
@@ -258,7 +248,8 @@ def main(P_path, T_path, k=20, lam=10.0, n_frames=30):
     T = (T - mu) / (scale + 1e-12)
     
     # Compute deformation frames
-    ts, frames = laplacian_morph_frames(P, T, k=k, lam=lam, n_frames=n_frames, refresh_every=5, sigma=None)
+    ts, frames = laplacian_morph_frames(P, T, k=k, lam=lam, n_frames=n_frames, 
+                                        refresh_every=5, sigma=sigma, normalize=normalize)
     
     # Visualize
     plotly_slider(frames, title=f"Laplacian morph (k={k}, λ={lam})")
@@ -269,10 +260,12 @@ if __name__ == "__main__":
     
     parser.add_argument("p_path", type=str, help="Path to matrix P (.ply file)")
     parser.add_argument("t_path", type=str, help="Path to matrix T (.ply file)")
-    parser.add_argument("--k", type=int, default=20)
-    parser.add_argument("--lam", type=float, default=10.0)
-    parser.add_argument("--frames", type=int, default=30)
-
+    parser.add_argument("--k", type=int, default=20, help="number of nearest neighbors")
+    parser.add_argument("--lam", type=float, default=10.0, help="stiffness parameter")
+    parser.add_argument("--n_frames", type=int, default=30, help="number of frames")
+    parser.add_argument("--refresh_every", type=int, default=5, help="number of steps after which Laplacian and correspondence are updated")
+    parser.add_argument('--normalize', action='store_true', help="Enable normalization (default is False)")
+    
     args = parser.parse_args()
 
     # REMOVE np.load() from here. Just pass the strings (paths) to main.
@@ -282,7 +275,9 @@ if __name__ == "__main__":
             args.t_path, 
             k=args.k, 
             lam=args.lam, 
-            n_frames=args.frames
+            n_frames=args.n_frames,
+            refresh_every=args.refresh_every, 
+            normalize=args.normalize
         )
     except Exception as e:
         print(f"Error during execution: {e}")
