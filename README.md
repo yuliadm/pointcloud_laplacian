@@ -69,11 +69,11 @@ python laplacian.py 'data/bunny.ply' 'data/dragon.ply' --k 25 --lam 5.0 --normal
  * `--normalize`: help="Enable normalization (default (no flag) is False)") 
 
 The `tests.py` file within the same directory runs several unit tests. Execution (inside /tests): 
-with unnormalized Laplacian
+* with unnormalized Laplacian
 ```bash
 python tests.py
 ```
-with normalized Laplacian
+* with normalized Laplacian
 ```bash
 python tests.py --normalize
 ```
